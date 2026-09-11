@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>NUESA-UCC Student Portal</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            .navbar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                color: white;
+                padding: 10px 20px;
+                font-family: sans-serif
+            }
+            .nav-brand {
+                font-weight: bold;
+                font-size: 1.2rem;
+            }
+
+            .menu-wraper {
+                margin-left: auto;
+                position: relative;
+                display: inline-block;
+            }
+            .body-subtitle {
+                font-size: 14px;
+                margin-top: 4px;
+            }
+            .dots-btn {
+                background: none;
+                border: none;
+                color: white;
+                font-size: 1.5rem;
+                cursor: pointer;
+            }
+            .dropdown {
+                position: absolute;
+                right: 0;
+                top: 0%;
+                margin-top: 4px;
+                border-radius: 8px;
+                min-width: 200px;
+                z-index: 1000;
+                background: linear-gradient(
+                    135deg,
+                    rgba(0, 0, 0, 0.85) 50%,
+                    rgba (10, 50, 120, 0.95) 100%
+                ) !important;
+                backdrop-filter: blur(12px) !important;
+                -webkit-backdrop-filter: blur(12px) !important;
+                border: 1px solid rgba(255, 255, 255, 0.25) !important;
+                box-shadow: 0 8px 32px 0 rgb(15, 0, 82) !important;
+            }
+            .menu-item {
+                display: block;
+                padding: 12px,16px;
+                color: #ffffff;
+                text-decoration: none;
+                font-family: sans-serif;
+            }
+            .menu-item:hover {
+                background-color: #f1f1f1;
+            }
+            .menu-item.active {
+                font-weight: bold;
+                background-color: #e9e9e9;
+            }
+            .brand-container {
+                display: flex;
+                flex-direction: column;
+                margin-left: 15px;
+            }
+            .menu-item.danger {
+                color: red;
+                border-top: 1px solid #eee;
+            }
+            .dropdown.hidden {
+                display: none;
+            }
+            .dropdown {
+                background: linear-gradient(
+                    135deg,
+                    rgba(225, 225, 225, 0.45) 0%,
+                    rgba(225, 225, 225, 0.20) 40%,
+                    rgba(240, 240, 240, 0.15) 60%,
+                    rgba(215, 225, 245, 0.35) 100%
+                ) !important;
+                backdrop-filter: blur(20px) !important;
+                -webkit-backdrop-filter: blur(20px) !important;
+                border: 1px solid rgba(225, 225, 225, 0.5) !important;
+                box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.3) !important;
+                border-radius: 8px;
+                overflow: hidden;
+            }
+            .menu-item {
+                display: block;
+                padding: 12px 16px;
+                text-decoration: none;
+                color: #1a1a1a;
+                font-family: sans-serif;
+            }
+            menu-item:hover {
+                background-color: rgba(225, 225, 225, 0.3);
+            }
+            body {
+                min-height: 100vh;
+                width: 100%;
+                margin: 0;
+                color: white;
+                background: radial-gradient(circle at 50% 25%, rgba(10, 45, 20, 0.6) 0%, rgba(5, 10, 5, 0.98) 80%),
+                            url('back2.jpeg') #050b06;
+                background-size: contain;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+            }
+            * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .menu-container {
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .menu-btn {
+            display: block;
+            width: 100%;
+            padding: 16px 20px;
+            background-color: #028517;
+            color: #ffffff;
+            border: 2px solid #803f02;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .menu-btn:hover {
+            background-color: #4a90e2;
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(74, 144, 226, 0.2);
+        }
+        </style>
+    </head>
+    <body>
+        <div id="portal-section">    
+            <nav class="navbar">
+                <img src="logo.png" style="width: 50px; height: 50px; ">
+                <div class="nav-brand" >Nigerian Universities Engineering Students Association
+                    <br>NUESA_UCC</br>
+                </div>
+                <div class="menu-wrapper">
+                    <button id="dots-btn" class="dots-btn">&#8942;</button>
+                    <div id="dropdown-menu" class="dropdown hidden">
+                        <a href="#" class="menu-item active" onclick="switchPage('news.html')">Latest News</a>
+                        <a href="#" class="menu-item" onclick="window.location.href='Index.html'">Faculy Updates</a>
+                        <a href="#" class="menu-item" onclick="window.location.href='Index.html'">Course Files & Materials</a>
+                        <a href="#" class="menu-item danger" id="logout-btn">Logout</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <script>
+            const dotsbtn = document.getElementById('dots-btn');
+            const dropdownmenu = document.getElementById('dropdown-menu');
+
+            dotsbtn.addEventListener('click', function(event) {
+                dropdownmenu.classList.toggle('hidden');
+                event.stopPropagation();
+            });
+
+            window.addEventListener('click',function(){
+                if (!dropdownmenu.classList.contains('hidden')){
+                    dropdownmenu.classList.add('hidden');
+                }
+            });
+
+            function switchPage(pageId) {
+                console.log("switching to page: " + pageId);
+            }
+        </script>
+        <div>
+            <a href="updates.html" class="menu-btn">news</a>
+            <br>
+            <a href="payments.html" class="menu-btn">payments</a>
+            <br>
+            <a href="coursematerials.html" class="menu-btn">Course Files and Materials</a>
+            <br>
+            <a href="login.html" class="menu-btn">news page</a>
+        </div>
+    </body>
+</html>
