@@ -36,11 +36,12 @@
             }
             .dropdown {
                 position: absolute;
-                right: 0;
+                right: 0%;
                 top: 0%;
+                height: 100%;
                 margin-top: 4px;
                 border-radius: 8px;
-                min-width: 200px;
+                min-width: 25%;
                 z-index: 1000;
                 background: linear-gradient(
                     135deg,
@@ -66,11 +67,7 @@
                 font-weight: bold;
                 background-color: #e9e9e9;
             }
-            .brand-container {
-                display: flex;
-                flex-direction: column;
-                margin-left: 15px;
-            }
+            
             .menu-item.danger {
                 color: red;
                 border-top: 1px solid #eee;
@@ -99,20 +96,31 @@
                 text-decoration: none;
                 color: #1a1a1a;
                 font-family: sans-serif;
+                transition: all 0.2s ease-in-out;
             }
-            menu-item:hover {
-                background-color: rgba(225, 225, 225, 0.3);
+            .menu-item:hover {
+                background-color: rgba(29, 161, 83, 0.15); /* Tinted brand green hover state */
+                color: #1da153;
+                padding-left: 24px;
             }
             body {
                 min-height: 100vh;
                 width: 100%;
-                color: white;
-                background: radial-gradient(circle at 50% 25%, rgba(10, 45, 20, 0.6) 0%, rgba(5, 10, 5, 0.98) 70%),
-                            url('back2.jpeg') #050b06;
-                box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.6);
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                color: #f0fdf4;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+                background: linear-gradient(180deg, rgba(6, 12, 8, 0.94) 0%, rgba(3, 7, 4, 0.98) 100%), 
+                            url('https://unsplash.com');
                 background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
                 background-attachment: fixed;
+                position: relative;
+                overflow-x: hidden;
             }
+
         </style>
     </head>
     <body>
@@ -125,10 +133,12 @@
                 <div class="menu-wrapper">
                     <button id="dots-btn" class="dots-btn">&#8942;</button>
                     <div id="dropdown-menu" class="dropdown hidden">
-                        <a href="#" class="menu-item active" onclick="switchPage('updates.html')">Faculty Updates</a>
-                        <a href="#" class="menu-item" onclick="window.location.href='updates.html'">Faculy Updates</a>
-                        <a href="#" class="menu-item" onclick="switchPage('files-page')">Course Files & Materials</a>
-                        <a href="#" class="menu-item danger" id="logout-btn">Logout</a>
+                        <a href="updates.html" class="menu-item active">Faculty Updates</a>
+                        <a href="payments.html" class="menu-item">Payments</a>
+                        <a href="files-page" class="menu-item">Course Files & Materials</a>
+                        <br>
+                        <a href="files-page" class="menu-item">Contact us</a>
+                        <a href="index.html" class="menu-item danger">Logout</a>
                     </div>
                 </div>
             </nav>
@@ -180,6 +190,9 @@
             align-items: center;
             justify-content: space-between;
             gap: 15px;
+        }
+        .hidden {
+            display: none !important;
         }
         .search-bar {
             flex-grow: 1;
@@ -258,7 +271,6 @@
     <div class="feed-container">
         <header class="top-header">
             <input type="text" id="searchInput" class="search-bar" placeholder="🔍 Search...">
-            <a href="logout.html" class="logout-link">Log out</a>
         </header>
         <nav class="categories-tags">
             <button class="tag active" data-filter="all">All</button>
@@ -300,22 +312,35 @@
     <script>
         const tags = document.querySelectorAll('.tag');
         const cards = document.querySelectorAll('.news-card');
+        const searchInput = document.getElementById('searchInput');
+        function filterFeed() {
+            const activeTag = document.querySelector('.tag.active');
+            const filterValue = activeTag ? activeTag.getAttribute('data-filter') : 'all';
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            cards.forEach(card => {
+                const cardCategory = card.getAttribute('data-category');
+                const captionText = card.querySelector('.news-caption').textContent.toLowerCase();
+                const matchesCategory = (filterValue === 'all' || filterValue === cardCategory);
+                const matchesSearch = captionText.includes(searchTerm);
+                if (matchesCategory && matchesSearch) {
+                card.classList.remove('hidden');
+                 } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
         tags.forEach(tag => {
             tag.addEventListener('click', () => {
                 document.querySelector('.tag.active').classList.remove('active');
                 tag.classList.add('active');
-                const filterValue = tag.getAttribute('data-filter');
-                cards.forEach(card => {
-                    const cardCategory = card.getAttribute('data-category');
-                    if (filterValue === 'all' || filterValue === cardCategory) {
-                        card.classList.remove('hidden');
-                    } else {
-                        card.classList.add('hidden');
-                    }
-                });
+                filterFeed();
             });
         });
+        searchInput.addEventListener('input', () => {
+            filterFeed();
+        });
     </script>
+
 </body>
 </html>
 
