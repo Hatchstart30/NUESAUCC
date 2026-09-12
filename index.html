@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>NUESA-UCC Student Portal</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            .navbar {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 14px 20px;
+                background: rgba(10, 20, 13, 0.7);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                border-bottom: 1px solid rgba(29, 161, 83, 0.15);
+                position: sticky;
+                top: 0;
+                z-index: 1000;
+            }
+            .nav-brand {
+                font-weight: 700;
+                font-size: 13px;
+                letter-spacing: 0.3px;
+                line-height: 1.3;
+                color: #ffffff;
+            }
+            .nav-brand span, .nav-brand br + span {
+                color: #1da153 !important;
+            }
+            .menu-wraper {
+                margin-left: auto;
+                position: relative;
+                display: inline-block;
+            }
+            .body-subtitle {
+                font-size: 14px;
+                margin-top: 4px;
+            }
+            .dots-btn {
+                background: none;
+                border: none;
+                color: white;
+                font-size: 1.5rem;
+                cursor: pointer;
+            }
+            .dropdown {
+                position: absolute;
+                right: 0;
+                top: 0%;
+                margin-top: 4px;
+                border-radius: 8px;
+                min-width: 200px;
+                z-index: 1000;
+                background: linear-gradient(
+                    135deg,
+                    rgba(0, 0, 0, 0.85) 50%,
+                    rgba (10, 50, 120, 0.95) 100%
+                ) !important;
+                backdrop-filter: blur(12px) !important;
+                -webkit-backdrop-filter: blur(12px) !important;
+                border: 1px solid rgba(255, 255, 255, 0.25) !important;
+                box-shadow: 0 8px 32px 0 rgb(15, 0, 82) !important;
+            }
+            .menu-item {
+                display: block;
+                padding: 12px 20px;
+                text-decoration: none;
+                color: #e2e8f0;
+                font-size: 14px;
+                font-weight: 500;
+                transition: all 0.2s ease-in-out;
+            }
+            .menu-item:hover {
+                background-color: #f1f1f1;
+                background-color: rgba(29, 161, 83, 0.15); /* Tinted brand green hover state */
+                color: #1da153;
+                padding-left: 24px;
+            }
+            .menu-item.active {
+                font-weight: bold;
+                background-color: #e9e9e9;
+            }
+            .brand-container {
+                display: flex;
+                flex-direction: column;
+                margin-left: 15px;
+            }
+            .menu-item.danger {
+                color: red;
+                border-top: 1px solid #eee;
+            }
+            .dropdown.hidden {
+                display: none;
+            }
+            .dropdown {
+                background: linear-gradient(
+                    135deg,
+                    rgba(225, 225, 225, 0.45) 0%,
+                    rgba(225, 225, 225, 0.20) 40%,
+                    rgba(240, 240, 240, 0.15) 60%,
+                    rgba(215, 225, 245, 0.35) 100%
+                ) !important;
+                backdrop-filter: blur(20px) !important;
+                -webkit-backdrop-filter: blur(20px) !important;
+                border: 1px solid rgba(225, 225, 225, 0.5) !important;
+                box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.3) !important;
+                border-radius: 8px;
+                overflow: hidden;
+            }
+            .menu-item {
+                display: block;
+                padding: 12px 16px;
+                text-decoration: none;
+                color: #1a1a1a;
+                font-family: sans-serif;
+            }
+            menu-item:hover {
+                background-color: rgba(225, 225, 225, 0.3);
+            }
+            body {
+                min-height: 100vh;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                color: #f0fdf4;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+                background: linear-gradient(180deg, rgba(6, 12, 8, 0.94) 0%, rgba(3, 7, 4, 0.98) 100%), 
+                            url('https://unsplash.com');
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                position: relative;
+                overflow-x: hidden;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="portal-section">    
+            <nav class="navbar">
+                <img src="logo.png" style="width: 50px; height: 50px; ">
+                <div class="nav-brand" >Nigerian Universities Engineering Students Association
+                    <br style="color: #01c21b;">NUESA_UCC</br>
+                </div>
+                <div class="menu-wrapper">
+                    <button id="dots-btn" class="dots-btn">&#8942;</button>
+                    <div id="dropdown-menu" class="dropdown hidden">
+                        <a href="#" class="menu-item active" onclick="switchPage('news.html')">Latest News</a>
+                        <a href="login.html" class="menu-item">Faculy Updates</a>
+                        <a href="login.html" class="menu-item">Course Files & Materials</a>
+                        <a href="index.html" class="menu-item danger">Logout</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <script>
+            const dotsbtn = document.getElementById('dots-btn');
+            const dropdownmenu = document.getElementById('dropdown-menu');
+
+            dotsbtn.addEventListener('click', function(event) {
+                dropdownmenu.classList.toggle('hidden');
+                event.stopPropagation();
+            });
+
+            window.addEventListener('click',function(){
+                if (!dropdownmenu.classList.contains('hidden')){
+                    dropdownmenu.classList.add('hidden');
+                }
+            });
+
+            function switchPage(pageId) {
+                console.log("switching to page: " + pageId);
+            }
+        </script>
+    </body>
+</html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NUESA Section</title>
+    <style>
+        .moving-text-container {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            box-sizing: border-box;
+            background: linear-gradient(90deg, #7c3201, #01c21b);
+        }
+        .moving-text {
+            display: inline-block;
+            padding-left: 100%;
+            animation: loopText 10s linear infinite;
+        }
+        @keyframes loopText {
+            0%  {
+                transform: translate3d(0, 0, 0);
+            }
+            100%{
+                transform: translate3d(-100%, 0, 0);
+            }
+        }
+        .bar-green {
+                width: 100%;
+                height: 4px;
+                border-radius: 2px;
+                background: linear-gradient(90deg, 
+                    #0e832b 0%, 
+                    #0e832b 40%, 
+                    #e0e0e0 50%, 
+                    #0e832b 60%, 
+                    #0e832b 100%
+                );
+                background-size: 200% 100%;
+                animation: moveSilver 2.5s linear infinite;
+            }
+            @keyframes moveSilver {
+                0% {
+                    background-position: 200% 0;
+                }
+                100% {
+                    background-position: -200% 0;
+            }
+        }
+        .main-heading {
+            font-size: 38px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin: 0 0 24px 0;
+            letter-spacing: -0.5px;
+            text-align: center;
+        }
+        .text-green {
+            color: rgb(226, 73, 2);
+        }
+        .description {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #7edf93;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+        .tag-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .engineering-tag {
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-size: 13px;
+            color: #cccccc;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 48px;
+        }
+        .btn-primary {
+            background-color: #119e36;
+            color: #ffffff;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+        .btn-primary:hover {
+            background-color: #0e832b;
+        }
+        .btn-secondary {
+            background-color: transparent;
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: border-color 0.2s;
+        }
+        .btn-secondary:hover {
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+        .divider {
+            border: none;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 32px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+        .stat-item h3 {
+            font-size: 26px;
+            font-weight: 700;
+            color: #119e36;
+            margin: 0 0 6px 0;
+        }
+        .stat-item p {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #808080;
+            margin: 0;
+            line-height: 1.3;
+        }
+    </style>
+</head>
+<body>
+    <div class="content-container">
+        <div class="accent-bars">
+            <div class="bar-green"></div>
+        </div>
+        <h1 class="main-heading">
+            <span class="text-green">Empowering</span><br>
+            Engineers
+        </h1>
+        <p class="description">
+            NUESA-UCC (Nigerian Universities Engineering Students Association, University of Calabar Chapter) serves as the primary student wing of the Nigerian Society of Engineers on campus.
+        </p>
+        <div class="tag-container">
+            <span class="engineering-tag">⏃ Civil</span>
+            <span class="engineering-tag">⚙ Mechanical</span>
+            <span class="engineering-tag">⚡ Electrical</span>
+            <span class="engineering-tag">Petroleum</span>
+            <span class="engineering-tag">Chemical</span>
+            <span class="engineering-tag">Agric</span>
+            <span class="engineering-tag">Computer</span>
+        </div>
+        <div class="btn-container">
+            <a href="register.html" class="btn-primary">Register Now &rarr;</a>
+            <a href="login.html" class="btn-secondary"> Login </a>
+        </div>
+        <hr class="divider">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3>7</h3>
+                <p>University<br>Departments</p>
+            </div>
+            <div class="stat-item">
+                <h3>1000+<span style="font-size: 14px; font-weight:500;">Registered</span></h3>
+                <p>University<br>Students</p>
+            </div>
+            <div class="stat-item">
+                <h3>9</h3>
+                <p>ExCo<br>Members</p>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="moving-text-container">
+        <span class="moving-text"> Nigerian Universities Engineering Students Association - University Of Calabar Chapter NUESA-UCC Official Website</span>
+    </div>  
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bounded Image Card</title>
+    <style>
+        .image-cards {
+            border: 1px solid #142217;
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .image-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 304px;
+            max-width: 90vw;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            word-break: break-word;
+            background-color: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+            margin: 20px auto;
+        }
+        .image-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+        }
+        .card-text {
+            margin-top: 12px;
+            font-size: 14px;
+            line-height: 1.4;
+            color: #cccccc;
+            text-align: center;
+            word-wrap: break-word;
+        }
+        .executive-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            padding: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="image-cards">
+        <img src="black.png" alt="Display Image">
+        <div class="card-text">
+            NUESA UCC Executive President of the 2025/2026 Profectus Admintration
+        </div>
+    </div>
+    <div class="executive-grid">
+    <div class="image-cards">
+        <img src="3.png" alt="Display Image">
+        <div class="card-text">
+            NUESA UCC Executive Vice-President of the 2025/2026 Profectus Admintration
+        </div>
+    </div>
+    <div class="image-cards">
+        <img src="black.png" alt="Display Image">
+        <div class="card-text">
+            NUESA UCC Executive General Secretary of the 2025/2026 Profectus Admintration
+        </div>
+    </div></div>
+    <div class="image-card">
+        <img src="black.png" alt="Display Image">
+        <div class="card-text">
+            NUESA UCC Executive Financial Secretary of the 2025/2026 Profectus Admintration
+        </div>
+    </div>
+    <div class="image-card">
+        <img src="black.png" alt="Display Image">
+        <div class="card-text">
+            NUESA UCC Executive Deputy Secretary General of the 2025/2026 Profectus Admintration
+        </div>
+    </div>
+    <div class="image-card">
+        <img src="black.png" alt="Display Image">
+        <div class="card-text">
+            NUESA UCC Executive Director of socials of the 2025/2026 Profectus Admintration
+        </div>
+    </div>
+    <div class="image-card">
+        <img src="black.png" alt="Display Image">
+        <div class="card-text">
+            NUESA UCC Executive Director of sports of the 2025/2026 Profectus Admintration
+        </div>
+    </div>
+    <div class="image-card">
+        <img src="black.png" alt="Display Image">
+        <div class="card-text">
+            NUESA UCC Executive Director of Information of the 2025/2026 Profectus Admintration
+        </div>
+    </div>
+    </div>
+</body>
+</html>
